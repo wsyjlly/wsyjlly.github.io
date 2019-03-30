@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/common.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/ucr_index.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/login.css">
+</head>
+<body>
+<div id="root" class="r-n-fs-fs" :class="root_scroll" v-cloak>
+        <!-- 左栏 -->
+        <div id="main_left" class="b_color c-n-fs-fs" :style="{width:main_left_width+'px',height:main_height+'px'}">
+
+                <!-- logo部分 -->
+                <div id="logo" class="r-n-c-c b_color" :style="{width:main_left_width+'px'}">
+                        <img src="images/logo.png">
+                        <div id="logo_text" :style="{display:main_left_width==150?'block':'none'}">云预约</div>
+                </div>
+
+                <!-- 左部（一级菜单部分） -->
+                <div id="primary_menu" class="c-n-fs-c" :style="{width:main_left_width+'px'}">
+                        <div class="primary_item r-n-fs-c"
+                             @click="primary_menu_click(index)"
+                             v-for="(item, index) in primary_array"
+                             :key="index"
+                             :style="{width:main_left_width+'px',background:item.selected ? 'rgb(190,194,201)':'',color:item.selected ? '#252A2F':''}">
+                                <img :src="item.selected ? item.src2:item.src1"/>
+                                <div class="primary_item_text" :style="{display:main_left_width==150?'block':'none'}">{{item.name}}</div>
+                        </div>
+                </div>
+
+                <!--试图切换按钮-->
+                <div id="circle" class="r-n-c-c" @click="details_click" :style="{display:main_left_width==150?'none':'block'}"><img src="images/circle.png"/></div>
+                <div id="simple" class="r-n-c-c" @click="simple_click" :style="{display:main_left_width==150?'block':'none'}"><img src="images/circleb.png"/></div>
+        </div>
+
+
+        <!-- 右栏 -->
+        <div id="main_right" style="background:#9acfea;" :style="{width : main_right_width+'px',height : main_height+'px'}">
+
+                <!--二级菜单区 -->
+                <div id="nav_menu" class="r-n-sb-c b_color" :style="{width : main_right_width+'px'}">
+                        <!--二级菜单项-->
+                        <div id="secondary_menu" class="r-n-fs-c">
+                                <div class="secondary_item"
+                                     @click="secondary_item_click(index)"
+                                     v-for="(item,index) in secondary_array[current_primary]"
+                                     :key="index"
+                                     :style="{background:item.selected ?'rgb(190,194,201)':'',color:item.selected ? '#252A2F':''}">{{item.name}}</div>
+                        </div>
+                        <!--登录-->
+                        <div id="login">
+                                <div id="login_logo" @click="login_logo_click" @mouseleave="login_logo_mouseleave" class="r-n-c-c">
+                                        <img src="images/login_logo.png" alt="">
+                                        <div id="login_content" :style="{display:login_content_show?'block':'none'}">
+                                                <div id="login_name" class="login_item r-n-fs-c"><img src="images/circle.png" alt="">简单点</div>
+                                                <div id="setting" class="login_item r-n-fs-c"><img src="images/primary_6.png" alt="">账号设置</div>
+                                                <div id="login_out" class="login_item r-n-fs-c"><img src="images/back.png" alt="">退出登录</div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+
+                <!-- 内容区 -->
+                <div id="content" class="r-n-c-c" style="background:#1b6d85;" :style="{width : main_right_width+'px',height : main_bottom_height+'px'}">
+                        <div id="content_inner" class="r-n-fs-c">
+
+                        </div>
+                </div>
+        </div>
+</div>
+</body>
+<script type="text/javascript" src="scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="scripts/vue/vue.js"></script>
+<script type="text/javascript" src="scripts/index_vue_bak.js"></script>
+</html>

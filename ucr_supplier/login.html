@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="styles/css/login.css">
+</head>
+<style>
+
+</style>
+<body>
+<div id="root" class="r-n-fs-fs" :style="{width:main_width+'px',height:main_height+'px'}" v-cloak>
+        <div id="root_inner" class="r-n-c-c" :style="{width:main_width-40+'px',height:main_height-40+'px'}">
+                <div id="login_title" class="r-n-c-c"  :style="{width:main_width-40+'px',height:main_height-42+'px'}">
+                        <img src="images/logobg.jpg"  :style="{width:main_width-40+'px',height:main_height-42+'px'}">
+                </div>
+                <div id="title">城市云生活预约管理系统</div>
+                <div id="login" class="c-n-c-c" :style="{right:main_width*0.1+'px'}">
+                        <ul class="c-n-c-c">
+                                <li class="item r-n-c-c"><input type="text" v-model="name" placeholder="账号/手机号/邮箱"></li>
+                                <li class="item r-n-c-c"><input type="password" v-model="pwd" placeholder="密码"></li>
+                                <li class="item r-n-fs-c">
+                                        <button id="submit" @click="submit" value="登录">登录</button>
+                                        <button id="register" @click="register" value="注册">注册</button>
+                                        <button id="forget_pwd" @click="forget_pwd" value="忘记密码">忘记密码</button>
+                                </li>
+                        </ul>
+                </div>
+        </div>
+        <div id="top_line" :style="{width:main_width-40+'px'}"></div>
+        <div id="right_line" :style="{height:main_height-40+'px'}"></div>
+        <div id="bottom_line" :style="{width:main_width-40+'px'}"></div>
+</div>
+</body>
+<script type="text/javascript" src="scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="scripts/vue/vue.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+<script type="text/javascript" src="scripts/main.js"></script>
+<script type="text/javascript">
+	const root = new Vue({
+		el:"#root",
+		data:{
+                        main_width:window.innerWidth,
+                        main_height:window.innerHeight,
+                        name:"",
+                        pwd:""
+		},
+		watch: {
+			// 监视属性
+			main_width:function (value) {
+                                // alert(value);
+			},
+			main_height:function (value) {
+
+				// alert("main_width"+this.main_width);
+				// alert("main_height"+this.main_height);
+			}
+		},
+		methods: {
+			//方法
+			//获取cookie
+			//  getCookie:function(name) {
+                        //         let cookieName = encodeURIComponent(name) + '=';
+                        //         let cookieStart = document.cookie.indexOf(cookieName);
+                        //         let cookieValue = null;
+                        //         if (cookieStart > -1) {
+                        //                 let cookieEnd = document.cookie.indexOf(';', cookieStart);
+                        //                 if (cookieEnd == -1) {
+                        //                         cookieEnd = document.cookie.length;
+                        //                 }
+                        //                 cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
+                        //         }
+                        //         return cookieValue;
+                        // },
+                        submit:function(){
+                        	console.log("name="+this.name+"   pwd="+this.pwd);
+				console.log(getCookie("status"));
+				$.post("https://wsyjlly.cn/supplier/login", { supplierID: this.name, supplier_pwd: this.pwd },
+					function(data){
+					console.log(data);
+                                        console.log(data.flag);
+                                        console.log(data.name);
+                                        console.log(data.path);
+				});
+				$.ajax({
+					type:"POST",
+					dataType:"JSON",
+                                        data:{
+						supplierID: this.name,
+                                                supplier_pwd: this.pwd
+                                        },
+					url: "https://wsyjlly.cn/supplier/login",
+					success: function(data){
+						// alert(data);
+						console.log(data);
+						console.log(data.flag);
+						console.log(data.name);
+						console.log(data.path);
+					}
+				});
+				location.href = "index.html"
+				// $.ajax({
+				// 	type:"POST",
+				// 	dataType:"JSON",
+				// 	data:{
+				// 		supplierID :100001,
+				// 		supplier_pwd : "ysw123456"
+				// 	},
+				// 	url: "https://wsyjlly.cn/supplier/login",
+				// 	success: function(data){
+				// 		// alert(data);
+				// 		console.log(data);
+				// 	}
+				// });
+                        },
+			register:function(){
+				console.log("name="+this.name+"   pwd="+this.pwd);
+                        },
+			forget_pwd:function () {
+				console.log("name="+this.name+"   pwd="+this.pwd);
+			},
+			setDefaultFrame() {
+
+				//console.log("*******************setDefaultFrame()执行*******************start");
+				const  that = this;
+				// that.main_height = window.innerHeight;
+				// that.main_width = window.innerWidth;
+				if(window.innerHeight<550){
+					that.main_height = 550;
+					// console.log("window.innerHeight="+window.innerHeight);
+				}
+				if(window.innerWidth<1200){
+					that.main_width = 1200;
+					// console.log("window.innerWidth="+window.innerWidth);
+				}
+				// window.localStorage.setItem("width",that.main_right_width);
+				// window.localStorage.setItem("height",that.main_bottom_height);
+				//console.log("that.main_right_width"+that.main_right_width);
+				//console.log("that.main_bottom_height"+that.main_bottom_height);
+				//console.log("*******************setDefaultFrame()执行*******************end");
+			}
+		},
+                created: function() {
+			// console.log("*******************created()执行*******************start");
+			this.setDefaultFrame();
+			// console.log("*******************created()执行*******************end");
+		},
+                update:function(){
+			this.setDefaultFrame();
+                }
+	})
+	window.onresize = ()=>{
+		root.$data.main_width = window.innerWidth;
+		root.$data.main_height = window.innerHeight;
+		root.setDefaultFrame();
+        }
+</script>
+</html>
