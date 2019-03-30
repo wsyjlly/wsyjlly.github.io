@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../styles/content_1/content_reservation_tip_add.css">
+</head>
+<style>
+	[v-cloak] {
+		display: none;
+	}
+	body::-webkit-scrollbar{
+		width: 10px;
+		height: 10px;
+		background-color: #252A2F;
+	}
+	body::-webkit-scrollbar-track{
+		/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);*/
+		border-radius: 5px;
+		background-color: #fff;
+	}
+	body::-webkit-scrollbar-thumb{
+		width: 5px;
+		height: 5px;
+		border-radius: 5px;
+		/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+		background-color: #252A2F;
+	}
+	body{
+		/*background:#2e6da4;*/
+		position: absolute;
+		left: 0;
+		font-family: "Microsoft YaHei UI";
+		overflow-x: hidden;
+		/*overflow-x:hidden;*/
+		/*overflow-y: scroll;*/
+	}
+	#root{
+		position: relative;
+		/*padding-bottom: 20px;*/
+	}
+	#root_inner{
+		/*background:#9acfea;*/
+		margin-left: 20px;
+		margin-top: 20px;
+		/*position: absolute;*/
+		/*left: 20px;*/
+	}
+	#title{
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		border: solid 1px #252A2F;
+		font-size: 20px;
+		font-weight: bolder;
+		text-align: center;
+	}
+	#content{
+		width: 100%;
+		border: solid 1px #252A2F;
+		font-size: 16px;
+		margin-top: 10px;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+	}
+
+	#content input{
+		text-indent: 6px;
+	}
+	#content>div{
+		/*width: 950px;*/
+		margin-left: 30px;
+		position: relative;
+		margin-top: 20px;
+		/*background: #9acfea;*/
+	}
+	#content>div:nth-child(1){
+		margin-top: 30px;
+	}
+	#content>div>span{
+		width: 90px;
+		line-height: 30px;
+		vertical-align: top;
+		position: absolute;
+		left: 0;
+	}
+	#list_title{
+		height: 30px;
+		font-weight: bolder;
+	}
+	#list_title>img{
+		width: 20px;
+		line-height: 20px;
+		position: absolute;
+		left: 90px;
+		cursor: pointer;
+	}
+	#list {
+		margin-top: 30px;
+	}
+	table{
+		border-collapse: collapse;
+	}
+	#list table,#list table tr,#list table tr th,#list table tr td{
+		border: solid 1px #DBDBDB;
+	}
+	#list table tr{
+		height: 40px;
+		line-height: 40px;
+	}
+	#list table tr th,#list table tr td{
+		line-height: 40px;
+		text-align: center;
+	}
+	.list_img>img{
+		vertical-align: middle;
+	}
+	.edit{
+		color: #ff6700;
+		cursor: pointer;
+	}
+	#content>hr{
+		margin: 30px;
+	}
+</style>
+<body :style="{width: root_width+'px'}">
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>类型添加</div>
+                <div id="content">
+                        <div id="list_title" class="r-n-fs-c" v-cloak>
+                                <span v-cloak>类型列表</span><img @click="add_show" src="../images/add.png" width="20" height="20" alt="">
+                        </div>
+                        <div id="list" class="r-n-fs-c">
+                                <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                        <tr>
+                                                <th v-cloak>ID</th>
+                                                <th v-cloak>内容</th>
+                                                <th v-cloak colspan="2">编辑</th>
+                                        </tr>
+                                        <!--<tr v-for="(item,index) in type_added" :key="index">-->
+                                                <!--<td v-cloak>{{item.id}}</td>-->
+                                                <!--<td v-cloak>{{item.price}}</td>-->
+                                                <!--<td class="edit" @click="update_(index)" v-cloak>修改</td>-->
+                                                <!--<td class="edit" @click="delete_(index)" v-cloak>删除</td>-->
+                                        <!--</tr>-->
+                                </table>
+                        </div>
+                        <hr/>
+                </div>
+        </div>
+</div>
+</body>
+<script type="text/javascript" src="../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../scripts/content_1/content_reservation_tip_add.js"></script>
+<script type="text/javascript">
+window.onresize = function () {
+        root.$data.root_width = window.innerWidth;
+        root.$data.root_height = window.innerHeight;
+};
+const root = new Vue({
+        el:"#root",
+        data:{
+                root_width:window.innerWidth,
+                root_height:window.innerHeight,
+        },
+        computed:{
+
+        },
+        watch: {
+
+        },
+        methods: {
+		add_show:function () {
+                        
+		}
+
+        },
+        created: function() {
+                //console.log("*******************created()执行*******************start");
+                const that = this;
+
+                //console.log("*******************created()执行*******************end");
+        },
+        updated: function(){
+                //console.log("*******************updated()执行*******************start");
+
+                //console.log("*******************updated()执行*******************end");
+        },
+})
+</script>
+</html>

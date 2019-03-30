@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/content_1/content_reservation_recommend.css">
+</head>
+<body :style="{width: root_width+'px'}">
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>推荐列表</div>
+                <div id="content">
+                        <div id="list" class="r-n-fs-c" v-show="!isEmpty">
+                                <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                        <tr>
+                                                <th v-cloak>预约名称</th>
+                                                <th v-cloak>推荐类型</th>
+                                                <th v-cloak>推荐主图</th>
+                                                <th v-cloak>推荐名称</th>
+                                                <th v-cloak>申请天数</th>
+                                                <th v-cloak>状态</th>
+                                                <th v-cloak colspan="2" width="100">操作</th>
+                                        </tr>
+                                        <tr v-for="(item,index) in recommend_list" :key="index">
+                                                <td v-cloak>{{item.name}}</td>
+                                                <td v-cloak>{{item.recommend_type}}</td>
+                                                <td class="list_img"><img :src="item.recommend_img_url" height="28" alt="" v-cloak></td>
+                                                <td v-cloak>{{item.recommend_name}}</td>
+                                                <td v-cloak>{{item.recommend_dates}}</td>
+                                                <td v-cloak>{{item.status}}</td>
+                                                <td class="edit" @click="update_(index)" width="100" v-cloak>更改</td>
+                                                <td class="edit" @click="delete_(index)" width="100" v-cloak>取消</td>
+                                        </tr>
+                                </table>
+                        </div>
+                        <div id="turn_page" class="r-n-c-c" :style="{width:root_width-110+'px'}" v-show="isTurnPage_show">
+                                <div id="last" class="button_turn_page" @click="last_page_click">上一页</div>
+                                <div id="current" class="button_turn_page">第{{current_page}}/{{total_page}}页</div>
+                                <div id="next" class="button_turn_page" @click="next_page_click">下一页</div>
+                        </div>
+                </div>
+        </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/content_1/content_reservation_recommend.js"></script>
+<script type="text/javascript">
+
+</script>
+</html>

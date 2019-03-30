@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/content_5/content_analyze_order.css">
+</head>
+<body>
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>收藏分析</div>
+                <div id="content">
+                       <div style="height: 100px;background:#9933ff;">
+
+                       </div>
+                </div>
+        </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/content_5/content_analyze_order.js"></script>
+<script type="text/javascript">
+	window.onresize = function () {
+		root.$data.root_width = window.innerWidth;
+		root.$data.root_height = window.innerHeight;
+	};
+	const root = new Vue({
+		el:"#root",
+		data:{
+			isEmpty:false,
+			root_width:window.innerWidth,
+			root_height:window.innerHeight
+		},
+		computed:{
+
+		},
+		watch: {
+
+		},
+		methods: {
+			//方法
+
+		},
+		created: function() {
+			//console.log("*******************created()执行*******************start");
+
+			//console.log("*******************created()执行*******************end");
+		},
+		updated: function(){
+			//console.log("*******************updated()执行*******************start");
+
+			//console.log("*******************updated()执行*******************end");
+		},
+	})
+</script>
+</html>

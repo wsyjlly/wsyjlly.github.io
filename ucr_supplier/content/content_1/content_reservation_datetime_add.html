@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/content_1/content_reservation_datetime_add.css">
+</head>
+<body :style="{width: root_width+'px'}">
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>时间添加</div>
+                <div id="content">
+                        <div id="list_title" class="r-n-fs-c" v-cloak>
+                                <span v-cloak>时间列表</span><img @click="add_show" src="../../images/add.png" width="20" height="20" alt="">
+                        </div>
+                        <div id="list" class="r-n-fs-c" v-show="!isEmpty">
+                                <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                        <tr>
+                                                <th v-cloak>日期</th>
+                                                <th v-cloak>星期</th>
+                                                <th v-cloak>时间</th>
+                                                <th v-cloak colspan="2">编辑</th>
+                                        </tr>
+                                        <tr v-for="(item,index) in datetime_table_array" :key="index">
+                                                <td>{{item.date}}</td>
+                                                <td>{{item.week}}</td>
+                                                <td>{{item.time}}</td>
+                                                <td class="edit" @click="update_(index)">修改</td>
+                                                <td class="edit" @click="delete_(index)">删除</td>
+                                        </tr>
+                                </table>
+                        </div>
+                        <hr  v-show="add_item_show" style="display:none"/>
+                        <div id="date" v-show="add_item_show" style="display:none">
+                                <label v-cloak>选择日期</label>
+                                <input type="date" v-model="start_date">
+                                <input type="date" v-model="end_date">
+                        </div>
+                        <div id="week" class="r-n-fs-fs" v-show="add_item_show" style="display:none">
+                                <span v-cloak>选择星期</span>
+                                <div v-for="(item,index) in week_array" class="week_select r-n-sa-c">
+                                        <label v-cloak>{{item.value}}</label>
+                                        <input type="checkbox" v-model="item.selected" @click="week_select_click(index)">
+                                </div>
+
+                        </div>
+                        <div id="time" v-show="add_item_show" style="display:none">
+                                <label v-cloak>选择时间</label>
+                                <input type="time" v-model="start_time"/>
+                                <input type="time" v-model="end_time"/>
+                        </div>
+                        <hr v-show="add_item_show" style="display:none"/>
+                        <div id="submit" class="r-n-c-c" v-show="add_item_show">
+                                <button type="submit"  :style="{background:hasChanged?'#c6ff80':'#FFF'}" @click="submit" v-cloak>{{submit_status}}</button>
+                        </div>
+                </div>
+        </div>
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/content_1/content_reservation_datetime_add.js"></script>
+<script type="text/javascript">
+</script>
+</html>

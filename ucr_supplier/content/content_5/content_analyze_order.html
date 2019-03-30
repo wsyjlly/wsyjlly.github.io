@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/content_5/content_analyze.css">
+        <link rel="stylesheet" href="../../styles/content_5/content_analyze_order.css">
+        <style>
+                #analyze_order div:nth-child(1){
+                        width: 38.2%;
+                        height: 400px;
+                }
+                #analyze_order div:nth-of-type(2){
+                        width: 61.8%;
+                        height: 400px;
+                }
+        </style>
+</head>
+<body>
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>订单分析</div>
+                <div id="content">
+                       <div id="analyze_order" class="r-n-fs-fs" style="height: 400px;background:#9933ff;" :style="{width:root_width-110+'px'}">
+                               <div style="background:#DBDBDB;"></div>
+                               <div id="chart" style="background:#ff6700;"></div>
+                       </div>
+                </div>
+        </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/charts/echarts.js"></script>
+<script type="text/javascript" src="../../scripts/content_5/content_analyze_order.js"></script>
+<script type="text/javascript">
+	window.onresize = function () {
+		root.$data.root_width = window.innerWidth;
+		root.$data.root_height = window.innerHeight;
+	};
+	const root = new Vue({
+		el:"#root",
+		data:{
+			isEmpty:false,
+			root_width:window.innerWidth,
+			root_height:window.innerHeight
+		},
+		computed:{
+
+		},
+		watch: {
+
+		},
+		methods: {
+			//方法
+
+		},
+		created: function() {
+			//console.log("*******************created()执行*******************start");
+
+			//console.log("*******************created()执行*******************end");
+		},
+		updated: function(){
+			//console.log("*******************updated()执行*******************start");
+
+			//console.log("*******************updated()执行*******************end");
+		},
+		mounted: function () {
+			option = {
+				backgroundColor: '#2c343c',
+				visualMap: {
+					show: false,
+					min: 80,
+					max: 600,
+					inRange: {
+						colorLightness: [0, 1]
+					}
+				},
+				series : [
+					{
+						name: '访问来源',
+						type: 'pie',
+						radius: '70%',//半径
+						data:[
+							{value:235, name:'视频广告'},//块比例与名称
+							{value:274, name:'联盟广告'},
+							{value:310, name:'邮件营销'},
+							{value:335, name:'直接访问'},
+							{value:400, name:'搜索引擎'}
+						],
+						roseType: 'angle',
+						label: {
+							normal: {
+								textStyle: {
+									color: 'rgba(255, 255, 255, 0.3)'//name颜色
+
+								}
+							},
+							show: true,
+							// 标签的文字。
+							formatter: 'This is a normal label.'
+						},
+						labelLine: {
+							normal: {
+								lineStyle: {
+									color: 'rgba(255, 255, 255, 0.3)'//先颜色
+								}
+							}
+						},
+						itemStyle: {
+							normal: {
+								color: '#c23531',//块颜色
+								shadowBlur: 200,//阴影范围
+								shadowColor: 'rgba(0, 0, 0, 0.5)'//阴影
+							}
+						}
+					}
+
+				]
+			};
+			echarts.init(document.getElementById('chart')).setOption(option);
+		}
+	})
+</script>
+</html>

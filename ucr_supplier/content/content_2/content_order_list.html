@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>城市云生活预约管理系统</title>
+	<link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+	<link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+	<link rel="stylesheet" type="text/css" href="../../styles/content_2/content_order_list.css">
+</head>
+<style>
+
+
+</style>
+<body :style="{width: root_width+'px'}">
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+	<div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+		<div id="title" v-cloak>{{order_title}}</div>
+		<div id="content">
+			<div class="list c-n-fs-fs" v-show="statistics_isShow">
+				<p>订单简报</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单总数</th>
+						<th class="statistics_h" v-cloak>待付款</th>
+						<th class="statistics_h" v-cloak>待接单</th>
+						<th class="statistics_h" v-cloak>待取消</th>
+						<th class="statistics_h" v-cloak>待确认</th>
+						<th class="statistics_h" v-cloak>待评价</th>
+						<th class="statistics_h" v-cloak>已完成</th>
+						<th class="statistics_h" v-cloak>待退款</th>
+					</tr>
+					<tr>
+						<td v-cloak v-for="(item) in order_count">{{item}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list c-n-fs-fs" v-show="list_show[0]">
+				<p>全部订单</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单ID</th>
+						<th class="statistics_h" v-cloak>用户ID</th>
+						<th class="statistics_h" v-cloak>用户地址</th>
+						<th class="statistics_h" v-cloak>预定总数</th>
+						<th class="statistics_h" v-cloak>订单总价</th>
+						<th class="statistics_h" v-cloak>创建时间</th>
+						<th class="statistics_h" v-cloak>付款时间</th>
+						<th class="statistics_h" v-cloak>订单状态</th>
+						<th class="statistics_h" width="100">订单管理</th>
+					</tr>
+					<tr v-for="(item,index) in order_list" :key="index">
+						<td v-cloak>{{item.order_ID}}</td>
+						<td v-cloak>{{item.order_userID}}</td>
+						<td v-cloak>{{item.order_address}}</td>
+						<td v-cloak>{{item.order_count}}</td>
+						<td v-cloak>{{item.order_total_price}}</td>
+						<td v-cloak>{{item.order_create_time}}</td>
+						<td v-cloak>{{item.order_pay_time}}</td>
+						<td v-cloak>{{item.order_status}}</td>
+						<td class="edit" @click="manage_(index)" width="100" v-cloak>
+							<span v-show="item.order_status==='待付款'">-</span>
+							<span v-show="item.order_status==='待接单'">接单</span>
+							<span v-show="item.order_status==='待取消'">取消</span>
+							<span v-show="item.order_status==='待确认'">-</span>
+							<span v-show="item.order_status==='待评价'">-</span>
+							<span v-show="item.order_status==='已完成'">-</span>
+							<span v-show="item.order_status==='待退款'">退款</span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list c-n-fs-fs" v-show="list_show[1]">
+				<p>待付款</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单ID</th>
+						<th class="statistics_h" v-cloak>用户ID</th>
+						<th class="statistics_h" v-cloak>用户地址</th>
+						<th class="statistics_h" v-cloak>预定总数</th>
+						<th class="statistics_h" v-cloak>订单总价</th>
+						<th class="statistics_h" v-cloak>创建时间</th>
+						<th class="statistics_h" v-cloak>付款时间</th>
+						<th class="statistics_h" v-cloak>订单状态</th>
+					</tr>
+					<tr v-for="(item,index) in order_list_pay" :key="index">
+						<td v-cloak>{{item.order_ID}}</td>
+						<td v-cloak>{{item.order_userID}}</td>
+						<td v-cloak>{{item.order_address}}</td>
+						<td v-cloak>{{item.order_count}}</td>
+						<td v-cloak>{{item.order_total_price}}</td>
+						<td v-cloak>{{item.order_create_time}}</td>
+						<td v-cloak>{{item.order_pay_time}}</td>
+						<td v-cloak>{{item.order_status}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list c-n-fs-fs" v-show="list_show[2]">
+				<p>待接单</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单ID</th>
+						<th class="statistics_h" v-cloak>用户ID</th>
+						<th class="statistics_h" v-cloak>用户地址</th>
+						<th class="statistics_h" v-cloak>预定总数</th>
+						<th class="statistics_h" v-cloak>订单总价</th>
+						<th class="statistics_h" v-cloak>创建时间</th>
+						<th class="statistics_h" v-cloak>付款时间</th>
+						<th class="statistics_h" v-cloak>订单状态</th>
+						<th class="statistics_h" v-cloak colspan="2" width="100">管理</th>
+					</tr>
+					<tr v-for="(item,index) in order_list_accept" :key="index">
+						<td v-cloak>{{item.order_ID}}</td>
+						<td v-cloak>{{item.order_userID}}</td>
+						<td v-cloak>{{item.order_address}}</td>
+						<td v-cloak>{{item.order_count}}</td>
+						<td v-cloak>{{item.order_total_price}}</td>
+						<td v-cloak>{{item.order_create_time}}</td>
+						<td v-cloak>{{item.order_pay_time}}</td>
+						<td v-cloak>{{item.order_status}}</td>
+						<td class="edit" @click="update_(index)" width="100" v-cloak>接单</td>
+						<td class="edit" @click="recommend_(index)" width="100" v-cloak>拒绝接单</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list c-n-fs-fs" v-show="list_show[3]">
+				<p>待取消</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单ID</th>
+						<th class="statistics_h" v-cloak>用户ID</th>
+						<th class="statistics_h" v-cloak>用户地址</th>
+						<th class="statistics_h" v-cloak>预定总数</th>
+						<th class="statistics_h" v-cloak>订单总价</th>
+						<th class="statistics_h" v-cloak>创建时间</th>
+						<th class="statistics_h" v-cloak>付款时间</th>
+						<th class="statistics_h" v-cloak>订单状态</th>
+						<th class="statistics_h" v-cloak width="100">管理</th>
+					</tr>
+					<tr v-for="(item,index) in order_list_cancel" :key="index">
+						<td v-cloak>{{item.order_ID}}</td>
+						<td v-cloak>{{item.order_userID}}</td>
+						<td v-cloak>{{item.order_address}}</td>
+						<td v-cloak>{{item.order_count}}</td>
+						<td v-cloak>{{item.order_total_price}}</td>
+						<td v-cloak>{{item.order_create_time}}</td>
+						<td v-cloak>{{item.order_pay_time}}</td>
+						<td v-cloak>{{item.order_status}}</td>
+						<td class="edit" @click="update_(index)" width="100" v-cloak>取消</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list c-n-fs-fs" v-show="list_show[4]">
+				<p>待确认</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单ID</th>
+						<th class="statistics_h" v-cloak>用户ID</th>
+						<th class="statistics_h" v-cloak>用户地址</th>
+						<th class="statistics_h" v-cloak>预定总数</th>
+						<th class="statistics_h" v-cloak>订单总价</th>
+						<th class="statistics_h" v-cloak>创建时间</th>
+						<th class="statistics_h" v-cloak>付款时间</th>
+						<th class="statistics_h" v-cloak>订单状态</th>
+					</tr>
+					<tr v-for="(item,index) in order_list_ensure" :key="index">
+						<td v-cloak>{{item.order_ID}}</td>
+						<td v-cloak>{{item.order_userID}}</td>
+						<td v-cloak>{{item.order_address}}</td>
+						<td v-cloak>{{item.order_count}}</td>
+						<td v-cloak>{{item.order_total_price}}</td>
+						<td v-cloak>{{item.order_create_time}}</td>
+						<td v-cloak>{{item.order_pay_time}}</td>
+						<td v-cloak>{{item.order_status}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list c-n-fs-fs" v-show="list_show[5]">
+				<p>待评价</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单ID</th>
+						<th class="statistics_h" v-cloak>用户ID</th>
+						<th class="statistics_h" v-cloak>用户地址</th>
+						<th class="statistics_h" v-cloak>预定总数</th>
+						<th class="statistics_h" v-cloak>订单总价</th>
+						<th class="statistics_h" v-cloak>创建时间</th>
+						<th class="statistics_h" v-cloak>付款时间</th>
+						<th class="statistics_h" v-cloak>订单状态</th>
+					</tr>
+					<tr v-for="(item,index) in order_list_comment" :key="index">
+						<td v-cloak>{{item.order_ID}}</td>
+						<td v-cloak>{{item.order_userID}}</td>
+						<td v-cloak>{{item.order_address}}</td>
+						<td v-cloak>{{item.order_count}}</td>
+						<td v-cloak>{{item.order_total_price}}</td>
+						<td v-cloak>{{item.order_create_time}}</td>
+						<td v-cloak>{{item.order_pay_time}}</td>
+						<td v-cloak>{{item.order_status}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list c-n-fs-fs" v-show="list_show[6]">
+				<p>已完成</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单ID</th>
+						<th class="statistics_h" v-cloak>用户ID</th>
+						<th class="statistics_h" v-cloak>用户地址</th>
+						<th class="statistics_h" v-cloak>预定总数</th>
+						<th class="statistics_h" v-cloak>订单总价</th>
+						<th class="statistics_h" v-cloak>创建时间</th>
+						<th class="statistics_h" v-cloak>付款时间</th>
+						<th class="statistics_h" v-cloak>订单状态</th>
+					</tr>
+					<tr v-for="(item,index) in order_list_finished" :key="index">
+						<td v-cloak>{{item.order_ID}}</td>
+						<td v-cloak>{{item.order_userID}}</td>
+						<td v-cloak>{{item.order_address}}</td>
+						<td v-cloak>{{item.order_count}}</td>
+						<td v-cloak>{{item.order_total_price}}</td>
+						<td v-cloak>{{item.order_create_time}}</td>
+						<td v-cloak>{{item.order_pay_time}}</td>
+						<td v-cloak>{{item.order_status}}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list c-n-fs-fs" v-show="list_show[7]">
+				<p>退款</p>
+				<table border="1" cellspacing="0" cellpadding="0" align="center"
+				       :style="{width:root_width-110+'px'}">
+					<tr>
+						<th class="statistics_h" v-cloak>订单ID</th>
+						<th class="statistics_h" v-cloak>用户ID</th>
+						<th class="statistics_h" v-cloak>用户地址</th>
+						<th class="statistics_h" v-cloak>预定总数</th>
+						<th class="statistics_h" v-cloak>订单总价</th>
+						<th class="statistics_h" v-cloak>创建时间</th>
+						<th class="statistics_h" v-cloak>付款时间</th>
+						<th class="statistics_h" v-cloak>订单状态</th>
+						<th class="statistics_h" width="100">管理</th>
+					</tr>
+					<tr v-for="(item,index) in order_list_refund" :key="index">
+						<td v-cloak>{{item.order_ID}}</td>
+						<td v-cloak>{{item.order_userID}}</td>
+						<td v-cloak>{{item.order_address}}</td>
+						<td v-cloak>{{item.order_count}}</td>
+						<td v-cloak>{{item.order_total_price}}</td>
+						<td v-cloak>{{item.order_create_time}}</td>
+						<td v-cloak>{{item.order_pay_time}}</td>
+						<td v-cloak>{{item.order_status}}</td>
+						<td class="edit" @click="update_(index)" width="100" v-cloak>退款</td>
+					</tr>
+				</table>
+			</div>
+			<div id="turn_page" class="r-n-c-c" :style="{width:root_width-110+'px'}"
+			     v-show="isTurnPage_show">
+				<div id="last" class="button_turn_page" @click="last_page_click">上一页</div>
+				<div id="current" class="button_turn_page">第{{current_page}}/{{total_page}}页</div>
+				<div id="next" class="button_turn_page" @click="next_page_click">下一页</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/content_2/content_order_list.js"></script>
+<script type="text/javascript">
+	/**/
+	window.onresize = function () {
+		root.$data.root_width = window.innerWidth;
+		root.$data.root_height = window.innerHeight;
+	};
+	const root = new Vue({
+		el: "#root",
+		data: {
+			isEmpty: false,
+			root_width: window.innerWidth,
+			root_height: window.innerHeight,
+			order_title: "订单列表",
+			statistics_isShow:true,
+			num_every_page: 10,
+			current_page: 1,
+			total_page: 28,
+			order_num: 0,
+			isTurnPage_show: false,
+			//order_count:[0,0,0,0,0,0,0],
+			list_show:[false,false,false,false,false,false,false,false],
+			order_list: [
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待付款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待接单"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待取消"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待确认"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待评价"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "已完成"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+			],
+			order_list_pay:[
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待付款"
+				}
+			],
+			order_list_cancel:[
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待取消"
+				}
+			],
+			order_list_accept:[
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待接单"
+				}
+			],
+			order_list_ensure:[
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待确认"
+				}
+			],
+			order_list_comment:[
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待评价"
+				}
+			],
+			order_list_finished:[
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "已完成"
+				}
+			],
+			order_list_refund:[
+				{
+					order_ID: "2123132120181125",
+					order_userID: "wsyjlly",
+					order_address: "河南省周口市沈丘县刘庄店镇晏老家村",
+					order_count: 3,
+					order_total_price: 99.8,
+					order_create_time: 1223223335222,
+					order_pay_time: 1223223335222,
+					order_status: "待退款"
+				},
+			],
+
+		},
+		computed: {
+			order_count:function(){
+				let list=[0,0,0,0,0,0,0,0];
+				list[0]=this.order_list.length;
+				list[1]=this.order_list_pay.length;
+				list[2]=this.order_list_cancel.length;
+				list[3]=this.order_list_accept.length;
+				list[4]=this.order_list_ensure.length;
+				list[5]=this.order_list_comment.length;
+				list[6]=this.order_list_finished.length;
+				list[7]=this.order_list_refund.length;
+				return list;
+			}
+		},
+		watch: {
+			order_num: function (val) {
+				console.log(val);
+				if (val > this.num_every_page) {
+					this.isTurnPage_show = true;
+				}
+			},
+			order_title:function (val) {
+				if(val==="订单列表"){
+					this.statistics_isShow=true;
+				}else{
+					this.statistics_isShow=false;
+				}
+			}
+		},
+		methods: {
+			//方法
+			update_: function (index) {
+				window.location.href = "content_reservation_details.html?id=" + this.reservation_list[index].id;
+				//alert(this.reservation_list[index].id);
+			},
+			recommend_: function (index) {
+				window.location.href = "content_reservation_recommend_add.html?rid=" + this.reservation_list[index].id;
+			},
+			last_page_click: function () {
+				if (this.current_page > 1) {
+					this.current_page--;
+				}
+			},
+			next_page_click: function () {
+				if (this.current_page < this.order_num) {
+					this.current_page++;
+				}
+
+			},
+			GetQueryString: function(name)
+			{
+				let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+				let r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+				if (r != null) return unescape(r[2]);
+				return null;
+			},
+
+
+		},
+		created: function () {
+			//console.log("*******************created()执行*******************start");
+			//this.order_num = this.reservation_list.length;
+			// list[0]=this.order_list.length;
+			// list[1]=this.order_list_pay.length;
+			// list[2]=this.order_list_cancel.length;
+			// list[3]=this.order_list_accept.length;
+			// list[4]=this.order_list_ensure.length;
+			// list[5]=this.order_list_comment.length;
+			// list[6]=this.order_list_finished.length;
+			// list[7]=this.order_list_refund.length;
+			//console.log("*******************created()执行*******************end");
+		},
+		beforeMount:function () {
+			let page = Number.parseInt(this.GetQueryString("id"));
+			switch (page) {
+				case 0:{
+					this.order_title = "订单列表";
+					this.list_show[page] = true;
+					this.order_num = this.order_list.length;
+				}break;
+				case 1:{
+					this.order_title = "待付款";
+					this.list_show[page] = true;
+					this.order_num = this.order_list_pay.length;
+				}break;
+				case 2:{
+					this.order_title = "待接单";
+					this.list_show[page] = true;
+					this.order_num = this.order_list_cancel.length;
+				}break;
+				case 3:{
+					this.order_title = "待取消";
+					this.list_show[page] = true;
+					this.order_num = this.order_list_accept.length;
+				}break;
+				case 4:{
+					this.order_title = "待确认";
+					this.list_show[page] = true;
+					this.order_num = this.order_list_comment.length;
+				}break;
+				case 5:{
+					this.order_title = "待评价";
+					this.list_show[page] = true;
+					this.order_num = this.order_list_ensure.length;
+				}break;
+				case 6:{
+					this.order_title = "已完成";
+					this.list_show[page] = true;
+					this.order_num = this.order_list_finished.length;
+				}break;
+				case 7:{
+					this.order_title = "订单退款";
+					this.list_show[page] = true;
+					this.order_num = this.order_list_refund.length;
+				}break;
+			}
+			// this.order_title = this.GetQueryString("id");
+		},
+		updated: function () {
+			//console.log("*******************updated()执行*******************start");
+			this.order_num = this.reservation_list.length;
+
+			//console.log("*******************updated()执行*******************end");
+		}
+	})
+</script>
+</html>

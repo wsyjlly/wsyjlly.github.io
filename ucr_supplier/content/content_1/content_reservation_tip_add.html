@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/content_1/content_reservation_tip_add.css">
+</head>
+<body :style="{width: root_width+'px'}">
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>提示添加</div>
+                <div id="content">
+                        <div id="list_title" class="r-n-fs-c" v-cloak>
+                                <span v-cloak>提示列表</span><img @click="add_show" src="../../images/add.png" width="20" height="20" alt="">
+                        </div>
+                        <div id="list" class="r-n-fs-c" v-show="!isEmpty">
+                                <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                        <tr>
+                                                <th width="100" v-cloak>ID</th>
+                                                <th v-cloak>内容</th>
+                                                <th v-cloak colspan="2" width="200">编辑</th>
+                                        </tr>
+                                        <tr v-for="(item,index) in tip_added" :key="index">
+                                                <td v-cloak>{{item.id}}</td>
+                                                <td v-cloak>{{item.content}}</td>
+                                                <td class="edit" @click="update_(index)" v-cloak>修改</td>
+                                                <td class="edit" @click="delete_(index)" v-cloak>删除</td>
+                                        </tr>
+                                </table>
+                        </div>
+                        <hr v-show="item_add_show" style="display: none;"/>
+			<div id="tip_add_content" class="r-n-fs-fs" :style="{width:root_width-112+'px'}" v-show="item_add_show" style="display: none;">
+				<div id="tip_id" v-cloak>{{add_input_id}}</div>
+				<div id="tip_content" :style="{width:root_width-308+'px'}">
+					<input type="text" id="tip_content_inner" placeholder="请输入需要添加的提示内容" v-model="add_input_content" />
+				</div>
+				<div id="submit" @click="submit" :style="{background:isChanged?'#c6ff80':'#FFF'}" v-cloak>{{submit_status}}</div>
+			</div>
+                </div>
+        </div>
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/content_1/content_reservation_tip_add.js"></script>
+<script type="text/javascript">
+</script>
+</html>

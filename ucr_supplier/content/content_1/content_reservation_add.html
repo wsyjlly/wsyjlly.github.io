@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/content_1/content_reservation_add.css">
+</head>
+<body>
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>{{title}}</div>
+                <div id="content">
+                        <div id="name" class="r-n-fs-c" v-cloak>
+                                <span v-cloak>预约名称</span><input type="text" name="r_name" placeholder="请输入预约名称" v-model="r_name"/>
+                        </div>
+                        <div id="disc" v-cloak>
+                                <span v-cloak>预约描述</span><textarea name="r_desc" placeholder="请输入预约描述" v-model="r_desc"></textarea>
+                        </div>
+                        <div id="img" class="r-n-fs-fs">
+                                <span>预约主图</span><img :src="img_url" height="120" alt="">
+                                <input id="select_button" type="button" onclick="document.getElementById('file_select').click();" :value="img_select_btn_value"/>
+                                <!--<span>{{path}}</span>-->
+                                <input id="file_select" @change="file_select" type="file">
+                        </div>
+                        <div id="addr" class="r-w-fs-fs">
+                                <span>预约地址</span>
+                                <div id="" class="r-n-fs-c">
+                                        <select name="省" id="province" v-model="r_province">
+                                                <option  value="">省</option>
+                                                <option  value="">河南</option>
+                                        </select>
+                                        <select name="市" id="city" v-model="r_city">
+                                                <option  value="">市</option>
+                                                <option  value="">郑州</option>
+                                        </select>
+                                        <select name="县" id="county" v-model="r_county">
+                                                <option  value="">县</option>
+                                                <option  value="">沈丘</option>
+                                        </select>
+                                        <select name="镇" id="town" v-model="r_town">
+                                                <option  value="">镇</option>
+                                                <option  value="">刘庄店</option>
+                                        </select>
+                                </div>
+                                <input type="text" name="details" />
+                        </div>
+                        <hr />
+                        <div id="submit" class="r-n-c-c">
+                                <button type="submit" @click="submit">添加</button>
+                        </div>
+                </div>
+                <!--<div style="width: 100%;height: 80px;background:#9acfea;color: #FFF">bottom</div>-->
+        </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/content_1/content_reservation_add.js"></script>
+</html>

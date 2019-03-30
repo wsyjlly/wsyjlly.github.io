@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/content_1/content_reservation_details.css">
+</head>
+<body :style="{width: root_width+'px'}">
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>预约详情</div>
+                <div class="content">
+                        <div id="main" class="c-n-fs-fs">
+                                <div class="list_title r-n-fs-fs" v-cloak>
+                                        <span v-cloak>预约主体</span>
+                                        <div class="change" @click="main_edit">编辑</div>
+                                </div>
+                                <div id="name" class="r-n-fs-c" v-cloak>
+                                        <span v-cloak>预约名称</span><input type="text" name="r_name" placeholder="请输入预约名称" readonly v-model="r_name"/>
+                                </div>
+                                <div id="disc" v-cloak>
+                                        <span v-cloak>预约描述</span><textarea name="r_desc" placeholder="请输入预约描述" readonly v-model="r_desc"></textarea>
+                                </div>
+                                <div id="img" class="r-n-fs-fs">
+                                        <span>预约主图</span><img :src="r_image" height="120" alt="">
+                                </div>
+                                <div id="addr" class="r-w-fs-fs">
+                                        <span>预约地址</span>
+                                        <div id="address" class="r-n-fs-c">
+                                                <input name="省" id="province" readonly v-model="r_address_province"/>
+                                                <input name="市" id="city" readonly v-model="r_address_city"/>
+                                                <input name="县" id="county" readonly v-model="r_address_county"/>
+                                                <input name="镇" id="town" readonly v-model="r_address_town"/>
+                                                <input type="text" name="details" readonly v-model="r_address_details"/>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <div class="content">
+                        <div id="image">
+                                <div class="list_title r-n-fs-c" v-cloak>
+                                        <span v-cloak>图片列表</span>
+                                        <div id="select_img_type">
+                                                <select name="select_img" id="select_img" @change="select_type_click(list_image_current_index)" v-model="list_image_current_index">
+                                                        <option :value="index" v-for="(item,index) in image_type" :key="index">{{item}}</option>
+                                                </select>
+                                        </div>
+                                        <div class="change" @click="image_add">添加</div>
+                                </div>
+                                <hr/>
+                                <div class="list r-n-fs-c" v-show="!list_isEmpty[0][list_image_current_index]">
+                                        <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                                <tr>
+                                                        <th v-cloak>ID</th>
+                                                        <th v-cloak>图片</th>
+                                                        <th v-cloak colspan="2">编辑</th>
+                                                </tr>
+                                                <tr v-for="(item,index) in list_image[list_image_current_index]" :key="index" >
+                                                        <td v-cloak>{{item.id}}</td>
+                                                        <td class="list_img" v-cloak><img :src="item.src" alt="" height="60"></td>
+                                                        <td class="edit" @click="update_('image',index)" width="100" v-cloak>修改</td>
+                                                        <td class="edit" @click="delete_('image',index)" width="100" v-cloak>删除</td>
+                                                </tr>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+                <div class="content">
+                        <div id="type">
+                                <div class="list_title r-n-fs-c" v-cloak>
+                                        <span v-cloak>类型列表</span>
+                                        <div class="change" @click="type_add">添加</div>
+                                </div>
+                                <div class="list r-n-fs-c" v-show="!list_isEmpty[1]">
+                                        <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                                <tr>
+                                                        <th v-cloak>ID</th>
+                                                        <th v-cloak>类型图</th>
+                                                        <th v-cloak>类型</th>
+                                                        <th v-cloak>库存</th>
+                                                        <th v-cloak>单价</th>
+                                                        <th v-cloak colspan="2">编辑</th>
+                                                </tr>
+                                                <tr v-for="(item,index) in list_type" :key="index">
+                                                        <td v-cloak>{{item.id}}</td>
+                                                        <td class="list_img"><img :src="item.url" height="25" width="25" alt="" v-cloak></td>
+                                                        <td><span  v-for="item2 in item.typename_list" v-cloak>{{item2}} </span></td>
+                                                        <td v-cloak>{{item.count}}</td>
+                                                        <td v-cloak>{{item.price}}</td>
+                                                        <td class="edit" @click="update_('type',index)" width="100" v-cloak>修改</td>
+                                                        <td class="edit" @click="delete_('type',index)" width="100" v-cloak>删除</td>
+                                                </tr>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+                <div class="content">
+                        <div id="datetime">
+                                <div class="list_title r-n-fs-c" v-cloak>
+                                        <span v-cloak>时间列表</span>
+                                        <div class="change" @click="datetime_add">添加</div>
+                                </div>
+                                <div class="list r-n-fs-c" v-show="!list_isEmpty[2]">
+                                        <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                                <tr>
+                                                        <th v-cloak>日期</th>
+                                                        <th v-cloak>星期</th>
+                                                        <th v-cloak>时间</th>
+                                                        <th v-cloak colspan="2">编辑</th>
+                                                </tr>
+                                                <tr v-for="(item,index) in list_datetime" :key="index">
+                                                        <td>{{item.date}}</td>
+                                                        <td>{{item.week}}</td>
+                                                        <td>{{item.time}}</td>
+                                                        <td class="edit" @click="update_('datetime',index)" width="100">修改</td>
+                                                        <td class="edit" @click="delete_('datetime',index)" width="100">删除</td>
+                                                </tr>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+                <div class="content">
+                        <div id="tip">
+                                <div class="list_title r-n-fs-c" v-cloak>
+                                        <span v-cloak>提示列表</span>
+                                        <div class="change" @click="tip_add">添加</div>
+                                </div>
+                                <div class="list r-n-fs-c" v-show="!list_isEmpty[3]">
+                                        <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                                <tr>
+                                                        <th width="100" v-cloak>ID</th>
+                                                        <th v-cloak>内容</th>
+                                                        <th v-cloak colspan="2" width="200">编辑</th>
+                                                </tr>
+                                                <tr v-for="(item,index) in list_tip" :key="index">
+                                                        <td v-cloak>{{item.id}}</td>
+                                                        <td v-cloak>{{item.content}}</td>
+                                                        <td class="edit" @click="update_('tip',index)" width="100" v-cloak>修改</td>
+                                                        <td class="edit" @click="delete_('tip',index)" width="100" v-cloak>删除</td>
+                                                </tr>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+                <div class="content">
+                        <div id="step">
+                                <div class="list_title r-n-fs-c" v-cloak>
+                                        <span v-cloak>步骤列表</span>
+                                        <div class="change" @click="step_add">添加</div>
+                                </div>
+                                <div class="list r-n-fs-c" v-show="!list_isEmpty[4]">
+                                        <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                                <tr>
+                                                        <th width="100" v-cloak>ID</th>
+                                                        <th v-cloak>内容</th>
+                                                        <th v-cloak colspan="2" width="200">编辑</th>
+                                                </tr>
+                                                <tr v-for="(item,index) in list_step" :key="index">
+                                                        <td v-cloak>{{item.id}}</td>
+                                                        <td v-cloak>{{item.content}}</td>
+                                                        <td class="edit" @click="update_('step',index)" width="100" v-cloak>修改</td>
+                                                        <td class="edit" @click="delete_('step',index)" width="100" v-cloak>删除</td>
+                                                </tr>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+                <div class="content">
+                        <div id="method">
+                                <div class="list_title r-n-fs-c" v-cloak>
+                                        <span v-cloak>方式列表</span>
+                                        <div class="change" @click="method_add">添加</div>
+                                </div>
+                                <div class="list r-n-fs-c" v-show="!list_isEmpty[5]">
+                                        <table border="1" cellspacing="0"  cellpadding="0" align="center" :style="{width:root_width-110+'px'}">
+                                                <tr>
+                                                        <th width="100" v-cloak>ID</th>
+                                                        <th v-cloak>内容</th>
+                                                        <th v-cloak colspan="2" width="200">编辑</th>
+                                                </tr>
+                                                <tr v-for="(item,index) in list_method" :key="index">
+                                                        <td v-cloak>{{item.id}}</td>
+                                                        <td v-cloak>{{item.content}}</td>
+                                                        <td class="edit" @click="update_('method',index)" width="100" v-cloak>修改</td>
+                                                        <td class="edit" @click="delete_('method',index)" width="100" v-cloak>删除</td>
+                                                </tr>
+                                        </table>
+                                </div>
+                        </div>
+                </div>
+                <div class="content">
+                        <div id="delete" @click="reservation_delete_">删除该预约</div>
+                </div>
+        </div>
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/content_1/content_reservation_details.js"></script>
+<script type="text/javascript">
+</script>
+</html>

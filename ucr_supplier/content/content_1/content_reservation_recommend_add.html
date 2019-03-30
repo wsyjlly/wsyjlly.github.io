@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>城市云生活预约管理系统</title>
+        <link href="../../images/ucrlogo.ico" rel="shortcut icon"/>
+        <link rel="stylesheet" type="text/css" href="../../styles/css/flex.css">
+        <link rel="stylesheet" type="text/css" href="../../styles/content_1/content_reservation_recommend_add.css">
+</head>
+<body :style="{width: root_width+'px'}">
+<div id="root" class="r-n-fs-fs" :style="{width: root_width-30+'px'}">
+        <div id="root_inner" class="c-n-fs-fs" :style="{width:root_width-40+'px'}" v-cloak>
+                <div id="title" v-cloak>推荐申请</div>
+                <div id="content">
+                        <div id="list_title" class="r-n-fs-c" v-cloak>
+                                <span v-cloak>推荐添加</span><img @click="add_show" src="../../images/add.png" width="20" height="20" alt="">
+                        </div>
+
+                        <div class="recommend_select r-n-fs-c">
+                                <span>预约选择</span>
+                                <select name="reservation_select" v-model="reservation_select">
+                                        <option v-for="(item,index) in reservation_select_array" :key="index" :value="item.id">{{item.name}}</option>
+                                </select>
+                        </div>
+                        <div class="recommend_select r-n-fs-c">
+                                <span>推荐类型</span>
+                                <select name="type_select" v-model="type_select">
+                                        <option v-for="(item,index) in type_select_array" :key="index" :value="item">{{item}}</option>
+                                </select>
+                        </div>
+                        <div id="recommend_name" class="content_common r-n-fs-c">
+                                <span>推荐名称</span><input type="text" name="recommend_name" v-model="recommend_name" placeholder="请输入推荐名称"/>
+                        </div>
+                        <div id="img" class="r-n-fs-fs">
+                                <span>推荐主图</span><img :src="img_url" height="120" alt="">
+                                <input id="select_button" type="button" onclick="document.getElementById('file_select').click();" :value="img_select_btn_value"/>
+                                <!--<span>{{path}}</span>-->
+                                <input id="file_select" @change="file_select" type="file">
+                        </div>
+                        <hr/>
+                        <div id="submit" class="r-n-c-c">
+                                <button type="submit" @click="submit" v-cloak>申请</button>
+                        </div>
+                </div>
+        </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../../scripts/jquery/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="../../scripts/vue/vue.js"></script>
+<script type="text/javascript" src="../../scripts/content_1/content_reservation_recommend_add.js"></script>
+<script type="text/javascript">
+</script>
+</html>
