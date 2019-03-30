@@ -1,0 +1,262 @@
+/**/
+[v-cloak] {
+	display: none;
+}
+body::-webkit-scrollbar{
+	width: 10px;
+	height: 10px;
+	background-color: #252A2F;
+}
+body::-webkit-scrollbar-track{
+	/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);*/
+	border-radius: 5px;
+	background-color: #fff;
+}
+body::-webkit-scrollbar-thumb{
+	width: 5px;
+	height: 5px;
+	border-radius: 5px;
+	/*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*/
+	background-color: #252A2F;
+}
+body{
+	/*background:#2e6da4;*/
+	position: absolute;
+	left: 0;
+	font-family: "Microsoft YaHei UI";
+	overflow-x: hidden;
+	/*overflow-x:hidden;*/
+	/*overflow-y: scroll;*/
+}
+#root{
+	position: relative;
+	/*padding-bottom: 20px;*/
+}
+#root_inner{
+	/*background:#9acfea;*/
+	margin-left: 20px;
+	margin-top: 20px;
+	/*position: absolute;*/
+	/*left: 20px;*/
+}
+#title{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border: solid 1px #DBDBDB;
+	font-size: 20px;
+	font-weight: bolder;
+	text-align: center;
+}
+.content{
+	width: 100%;
+	border: solid 1px #DBDBDB;
+	font-size: 16px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.content input{
+	text-indent: 6px;
+}
+/*.content>div{*/
+/*!*width: 950px;*!*/
+/*margin-left: 30px;*/
+/*position: relative;*/
+/*margin-top: 20px;*/
+/*!*background: #9acfea;*!*/
+/*}*/
+.content>div>div{
+	/*width: 950px;*/
+	margin-left: 30px;
+	position: relative;
+	margin-top: 20px;
+	/*padding-bottom: 30px;*/
+	/*background: #9acfea;*/
+}
+.content>div>div:first-child{
+	margin-top: 30px;
+}
+.content>div>div:last-child{
+	margin-bottom: 30px;
+}
+.list_title{
+	height: 30px;
+	font-weight: bolder;
+}
+.list_title>img{
+	width: 20px;
+	line-height: 20px;
+	position: absolute;
+	left: 90px;
+	cursor: pointer;
+}
+
+.content hr{
+	margin: 30px;
+	outline: none;
+	background: #ff6700;
+	border: none;
+	border-top: solid 1px #DBDBDB;
+}
+
+
+
+/*main*/
+#main{
+	/*background: #2e6da4;*/
+	position: relative;
+	width: 100%;
+}
+#main>div{
+	/*background: #2e6da4;*/
+	/*position: relative;*/
+	width: 100%;
+}
+#main .list_title{
+	/*height: 60px;*/
+	/*border-bottom: solid 1px #DBDBDB;*/
+	/*margin-bottom: 10px;*/
+
+}
+#main .change{
+	position: absolute;
+	right: 60px;
+}
+#name{
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+}
+#name>input{
+	height: 28px;
+	width: 240px;
+	line-height: 30px;
+	position: absolute;
+	left: 90px;
+	outline: none;
+	border: solid 1px #DBDBDB;
+}
+#disc{
+	height: 120px;
+	position: relative;
+	/*background: #d2756f;*/
+}
+#disc>textarea{
+	width: 230px;
+	height: 120px;
+	line-height: 24px;
+	padding-left: 6px;
+	position: absolute;
+	left: 90px;
+	resize:none;
+	border: solid 1px #DBDBDB;
+}
+#img{
+	height: 130px;
+	/*background: #cccccc;*/
+}
+#img>img{
+	width: 130px;
+	height: 130px;
+	background: rgba(219, 219, 219, 0.42);
+	position: absolute;
+	left: 90px;
+	background: radial-gradient(circle at center,#fff,#DBDBDB);
+}
+#addr{
+	height: 30px;
+	/*background: #b11d23;*/
+}
+#addr>div{
+	width: 670px;
+	height: 30px;
+	position: absolute;
+	left: 90px;
+	/*background: #9acfea;*/
+}
+#addr input{
+	width: 160px;
+	height: 30px;
+	outline: none;
+	border: #DBDBDB solid 1px;
+}
+#addr>div>input:not(:nth-child(1)){
+	margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+#image{
+	position: relative;
+}
+.list_title{
+	height: 30px;
+	font-weight: bolder;
+}
+
+.list {
+	margin-top: 30px;
+}
+table{
+	border-collapse: collapse;
+}
+.list table,.list table tr,.list table tr th,.list table tr td{
+	border: solid 1px #DBDBDB;
+}
+.list table tr{
+	height: 40px;
+	line-height: 40px;
+}
+.list table tr th,.list table tr td{
+	line-height: 40px;
+	text-align: center;
+}
+.list_img{
+	padding: 5px;
+}
+.list_img>img{
+	vertical-align: middle;
+}
+.edit{
+	color: #ff6700;
+	cursor: pointer;
+}
+#select_img_type{
+	position: absolute;
+	left: 90px;
+	width: 160px;
+	height: 30px;
+}
+#select_img{
+	width: 160px;
+	height: 30px;
+	border: solid 1px #DBDBDB;
+	outline: none;
+}
+.change{
+	position: absolute;
+	right: 30px;
+	width: 75px;
+	height: 28px;
+	line-height: 28px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 500;
+	border: solid 0.7px #ff6700;
+	color: #ff6700;
+	cursor: pointer;
+}
+#delete{
+	height: 40px;
+	line-height: 38px;
+	text-align: center;
+	color: #ff3b2f;
+	cursor: pointer;
+	/*background: #9acfea;*/
+}

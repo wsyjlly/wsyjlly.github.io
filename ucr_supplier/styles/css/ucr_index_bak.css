@@ -1,0 +1,244 @@
+/*ucr_index.css*/
+/*body及内部的所有元素样式*/
+*{
+        margin: 0;
+        padding: 0;
+        font-family: "Microsoft YaHei UI";
+}
+/*取消选中背景色webkit*/
+*::selection{
+        background:none;
+}
+ /*取消选中背景色moz*/
+*::-moz-selection{
+        background:none;
+}
+/*主背景色*/
+.b_color {
+        background-color: #252A2F;
+}
+/*主字体色*/
+.c_color {
+        color:#DBDBDB;
+}
+/*菜单点击效果*/
+/*.c_primary_click{*/
+        /*background: rgb(190,194,201);*/
+/*}*/
+/*菜单悬空效果*/
+/*.c_primary_hover{*/
+        /*background: rgba(190,194,201,0.5);*/
+/*}*/
+
+.scroll_none{
+        /*隐藏滚动条，当IE下溢出，仍然可以滚动*/
+        -ms-overflow-style:none;
+        /*火狐下隐藏滚动条*/
+        overflow:-moz-scrollbars-none;
+        overflow: hidden;
+} /*Chrome下隐藏滚动条，溢出可以透明滚动*/
+.scroll_none::-webkit-scrollbar{width:0px}
+
+#root{
+        width: 100vw;
+        height: 100vh;
+}
+
+
+/*右侧滚动条样式*/
+body{
+        /*display: none;*/
+        /*overflow-x: hidden;*/
+}
+/*body::-webkit-scrollbar {*/
+        /*!*display: none;*!*/
+        /*!*overflow-y: auto;*!*/
+        /*!*overflow-x: auto;*!*/
+/*}*/
+
+/*#content{*/
+        /*overflow-y: auto;*/
+/*}*/
+/*#content::-webkit-scrollbar{*/
+        /*width: 10px;*/
+        /*height: 10px;*/
+        /*background-color: #009789;*/
+/*}*/
+/*#content::-webkit-scrollbar-track{*/
+        /*!*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.2);*!*/
+        /*border-radius: 5px;*/
+        /*background-color: #fff;*/
+/*}*/
+/*#content::-webkit-scrollbar-thumb{*/
+        /*width: 5px;*/
+        /*height: 5px;*/
+        /*border-radius: 5px;*/
+        /*!*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);*!*/
+        /*background-color: #009789;*/
+/*}*/
+
+
+
+
+
+
+
+
+
+
+/*左栏*/
+#main_left{
+        width: 150px;
+        height: 100vh;
+        position: relative;
+}
+
+/*logo*/
+#logo{
+        width:149px;
+        height:49px;
+        border-right: #DBDBDB solid 1px;
+        border-bottom: #DBDBDB solid 1px;
+        cursor: pointer;
+}
+#logo > img{
+        width:36px;
+        height:36px;
+}
+#logo_text{
+        width: 60px;
+        color: #DBDBDB;
+}
+/*一级菜单*/
+#primary_menu{
+        height: 320px;
+}
+/*一级菜单项*/
+.primary_item {
+        height: 50px;
+        color:#DBDBDB;
+}
+.primary_item:first-child {
+        margin-top: 20px;
+}
+.primary_item_text{
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+}
+/*logo文字，与一级菜单文字div*/
+#logo_text,.primary_item_text{
+        display: block;
+}
+/*展示详细一级菜单按钮*/
+#circle{
+        position: absolute;
+        bottom: 10px;
+        cursor: pointer;
+        display: none;
+}
+/*返回简单模式按钮*/
+#simple{
+        position: absolute;
+        top: 277px;
+        right: -25px;
+        cursor: pointer;
+}
+/*一级菜单项，二级菜单项鼠标悬空效果*/
+.primary_item:hover,.secondary_item:hover {
+        background: rgba(190,194,201,0.5);
+        cursor: pointer;
+}
+
+
+/*右栏*/
+#main_right{
+	/*height: 100vh;*/
+        background: #ff6700;
+        width: 1050px;
+}
+/*二级菜单*/
+#nav_menu{
+        height: 50px;
+        color:#DBDBDB;
+        width: 1050px;
+}
+/*二级菜单项*/
+.secondary_item{
+        width: 100px;
+        text-align: center;
+        font-size: 16px;
+        line-height: 50px;
+}
+/*二级菜单首项*/
+.secondary_item:first-child{
+        margin-left: 20px;
+}
+
+
+/*通用*/
+#circle>img,#simple>img,.primary_item>img{
+        width: 36px;
+        height: 36px;
+        margin: 0 7px;
+}
+
+
+
+/*登录logo*/
+#login{
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        position: relative;
+}
+#login_logo{
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+	padding-right: 10px;
+	padding-left: 120px;
+        /*background: #d2756f;*/
+}
+#login_logo>img{
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: solid 1px #dbdbdb;
+}
+/*登录logo信息栏*/
+#login_content{
+        width: 180px;
+        position: absolute;
+        top: 49px;
+        right: 0;
+        background: #293643;
+        /*border-top: solid 1px #DBDBDB;*/
+        padding: 10px 0;
+        color: #dbdbdb;
+        display: none;
+}
+.login_item{
+        width: 160px;
+        height: 40px;
+        margin-left: 10px;
+        background: #252a2f;
+}
+.login_item:hover{
+        background: rgba(190,194,201,0.5);
+}
+.login_item>img{
+        width: 30px;
+        height: 30px;
+}
+
+
+/*内容区*/
+#content{
+	/*width: 100%;*/
+	/*height: 100%;*/
+	/*background: #658b39;*/
+}
+#content_inner{
+	/*background: #658b39;*/
+}
