@@ -9,7 +9,7 @@
 ---------
 ## 我的项目
 - [ucr_supplier](wsyjlly.github.io/ucr_supplier/login.html)
-- [ucr_supplier](wsyjlly.github.io/ucr_supplier/login.html)
+- [vue-cloud-note](wsyjlly.github.io/vue-cloud-note/dist/index.html)
 - [ucr_supplier](wsyjlly.github.io/ucr_supplier/index.html)
 - [ucr_supplier](wsyjlly.github.io/ucr_supplier/index.html)
 
