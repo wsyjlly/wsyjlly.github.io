@@ -1,0 +1,808 @@
+/*flex布局模型  */
+/**
+        flex-direction  决定主轴的方向（即项目的排列方向
+                        flex-direction: row | row-reverse | column | column-reverse;
+        flex-wrap       默认情况下，项目都排在一条线（又称”轴线”）上。flex-wrap属性定义，如果一条轴线排不下，如何换行。
+                        flex-wrap: nowrap | wrap | wrap-reverse;
+        flex-flow       flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，默认值为row nowrap。
+                        flex-flow: <flex-direction> || <flex-wrap>;
+        justify-content 定义了项目在主轴上的对齐方式。
+                        justify-content: flex-start | flex-end | center | space-between | space-around;
+                        flex-start（默认值）：左对齐
+                        flex-end：右对齐
+                        center： 居中
+                        space-between：两端对齐，项目之间的间隔都相等。
+                        space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+
+        align-items     align-items属性定义项目在交叉轴上如何对齐。
+                        align-items: flex-start | flex-end | center | baseline | stretch;
+                        flex-start：交叉轴的起点对齐。
+                        flex-end：交叉轴的终点对齐。
+                        center：交叉轴的中点对齐。
+                        baseline: 项目的第一行文字的基线对齐。
+                        stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+
+        align-content   align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+                        align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+                        flex-start：与交叉轴的起点对齐。
+                        flex-end：与交叉轴的终点对齐。
+                        center：与交叉轴的中点对齐。
+                        space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+                        space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+                        stretch（默认值）：轴线占满整个交叉轴。
+        以下6个属性设置在项目上。
+        order           定义项目的排列顺序。数值越小，排列越靠前，默认为0。
+                        order: <integer>;
+        flex-grow       flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
+                        flex-grow: <number>; （ default 0）
+        flex-shrink     flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+                        flex-shrink: <number>;（ default 1）
+        flex-basis      flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。
+                        浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小。
+                        flex-basis: <length> | auto; （ default auto ）
+        flex            flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。
+                        flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+        align-self      允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，
+                        表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
+                        align-self: auto | flex-start | flex-end | center | baseline | stretch;
+
+ */
+/*====================================================================================================================*/
+/*=================================================flex单根轴线布局表==================================================*/
+/*====================================================================================================================*/
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：横轴 靠左排列*/
+.r-w-fs-fs {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+}
+.r-n-fs-fs {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+}
+.r-w-fs-c {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: flex-start;
+}
+.r-n-fs-c {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-start;
+}
+.r-w-fs-fe {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: flex-start;
+}
+.r-n-fs-fe {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        justify-content: flex-start;
+}
+.r-w-fs-b {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+        justify-content: flex-start;
+}
+.r-n-fs-b {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+        justify-content: flex-start;
+}
+.r-w-fs-s {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: stretch;
+        justify-content: flex-start;
+}
+.r-n-fs-s {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: flex-start;
+}
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：横轴 居中排列*/
+.r-n-c-fs {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: center;
+}
+.r-w-c-fs {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: center;
+}
+.r-n-c-c {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+}
+.r-w-c-c {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: center;
+}
+.r-n-c-fe {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        justify-content: center;
+}
+.r-w-c-fe {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: center;
+}
+.r-n-c-b {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+        justify-content: center;
+}
+.r-w-c-b {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+        justify-content: center;
+}
+.r-n-c-s {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: center;
+}
+.r-w-c-s {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: stretch;
+        justify-content: center;
+}
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：横轴 靠右排列*/
+.r-w-fe-fs {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: flex-end;
+}
+.r-n-fe-fs {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: flex-end;
+}
+.r-w-fe-c {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: flex-end;
+}
+.r-n-fe-c {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-end;
+}
+.r-w-fe-fe {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: flex-end;
+}
+.r-n-fe-fe {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        justify-content: flex-end;
+}
+.r-w-fe-b {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+        justify-content: flex-end;
+}
+.r-n-fe-b {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+        justify-content: flex-end;
+}
+.r-w-fe-s {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: stretch;
+        justify-content: flex-end;
+}
+.r-n-fe-s {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: flex-end;
+}
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：横轴 两端对齐，项目之间的间隔都相等排列*/
+.r-w-sb-fs {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+}
+.r-n-sb-fs {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: space-between;
+}
+.r-w-sb-c {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-between;
+}
+.r-n-sb-c {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+}
+.r-w-sb-fe {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+}
+.r-n-sb-fe {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        justify-content: space-between;
+}
+.r-w-sb-b {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+        justify-content: space-between;
+}
+.r-n-sb-b {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+        justify-content: space-between;
+}
+.r-w-sb-s {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: stretch;
+        justify-content: space-between;
+}
+.r-n-sb-s {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: space-between;
+}
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：横轴 每个项目两侧的间隔相等。项目之间的间隔比项目与边框的间隔大一倍排列*/
+.r-w-sa-fs {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-start;
+        justify-content: space-around;
+}
+.r-n-sa-fs {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: space-around;
+}
+.r-w-sa-c {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-around;
+}
+.r-n-sa-c {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-around;
+}
+.r-w-sa-fe {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: space-around;
+}
+.r-n-sa-fe {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        justify-content: space-around;
+}
+.r-w-sa-b {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: baseline;
+        justify-content: space-around;
+}
+.r-n-sa-b {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+        justify-content: space-around;
+}
+.r-w-sa-s {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: stretch;
+        justify-content: space-around;
+}
+.r-n-sa-s {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: space-around;
+}
+
+
+
+
+
+/*=====================================================================================================================*/
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：纵轴 靠上排列*/
+.c-w-fs-fs {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+}
+.c-n-fs-fs {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+}
+.c-w-fs-c {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: flex-start;
+}
+.c-n-fs-c {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: flex-start;
+}
+.c-w-fs-fe {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-end;
+        justify-content: flex-start;
+}
+.c-n-fs-fe {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-end;
+        justify-content: flex-start;
+}
+.c-w-fs-b {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: baseline;
+        justify-content: flex-start;
+}
+.c-n-fs-b {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: baseline;
+        justify-content: flex-start;
+}
+.c-w-fs-s {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: stretch;
+        justify-content: flex-start;
+}
+.c-n-fs-s {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        justify-content: flex-start;
+}
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：竖轴 靠中排列*/
+.c-n-c-fs {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        justify-content: center;
+}
+.c-w-c-fs {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-start;
+        justify-content: center;
+}
+.c-n-c-c {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: center;
+}
+.c-w-c-c {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+}
+.c-n-c-fe {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-end;
+        justify-content: center;
+}
+.c-w-c-fe {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-end;
+        justify-content: center;
+}
+.c-n-c-b {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: baseline;
+        justify-content: center;
+}
+.c-w-c-b {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: baseline;
+        justify-content: center;
+}
+.c-n-c-s {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        justify-content: center;
+}
+.c-w-c-s {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: stretch;
+        justify-content: center;
+}
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：竖轴 靠下排列*/
+.c-w-fe-fs {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-start;
+        justify-content: flex-end;
+}
+.c-n-fe-fs {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        justify-content: flex-end;
+}
+.c-w-fe-c {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: flex-end;
+}
+.c-n-fe-c {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: flex-end;
+}
+.c-w-fe-fe {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-end;
+        justify-content: flex-end;
+}
+.c-n-fe-fe {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-end;
+        justify-content: flex-end;
+}
+.c-w-fe-b {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: baseline;
+        justify-content: flex-end;
+}
+.c-n-fe-b {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: baseline;
+        justify-content: flex-end;
+}
+.c-w-fe-s {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: stretch;
+        justify-content: flex-end;
+}
+.c-n-fe-s {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        justify-content: flex-end;
+}
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：竖轴 两端对齐，项目之间的间隔都相等排列*/
+.c-w-sb-fs {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+}
+.c-n-sb-fs {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        justify-content: space-between;
+}
+.c-w-sb-c {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: space-between;
+}
+.c-n-sb-c {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: space-between;
+}
+.c-w-sb-fe {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+}
+.c-n-sb-fe {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-end;
+        justify-content: space-between;
+}
+.c-w-sb-b {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: baseline;
+        justify-content: space-between;
+}
+.c-n-sb-b {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: baseline;
+        justify-content: space-between;
+}
+.c-w-sb-s {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: stretch;
+        justify-content: space-between;
+}
+.c-n-sb-s {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        justify-content: space-between;
+}
+
+
+
+
+
+/*===========================================================*/
+/*      主轴：竖轴 每个项目两侧的间隔相等。项目之间的间隔比项目与边框的间隔大一倍排列*/
+.c-w-sa-fs {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-start;
+        justify-content: space-around;
+}
+.c-n-sa-fs {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        justify-content: space-around;
+}
+.c-w-sa-c {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: space-around;
+}
+.c-n-sa-c {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: space-around;
+}
+.c-w-sa-fe {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: flex-end;
+        justify-content: space-around;
+}
+.c-n-sa-fe {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-end;
+        justify-content: space-around;
+}
+.c-w-sa-b {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: baseline;
+        justify-content: space-around;
+}
+.c-n-sa-b {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: baseline;
+        justify-content: space-around;
+}
+.c-w-sa-s {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: stretch;
+        justify-content: space-around;
+}
+.c-n-sa-s {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        justify-content: space-around;
+}
+
+/*单独项*/
+.item-fill{
+  flex:auto;
+}
+
+
+/*======================================================================================================================*/
+/*======================================================================================================================*/
+/*======================================================================================================================*/
+/*多轴线flex  */
+.al_co_start {
+        align-content: flex-start;
+        -webkit-align-content: flex-start;
+}
+.al_co_center {
+        align-content: center;
+        -webkit-align-content: center;
+}
+.al_co_end {
+        align-content: flex-end;
+        -webkit-align-content: flex-end;
+}
+.al_co_sb {
+        align-content: space-between;
+        -webkit-align-content: space-between;
+}
+.al_co_sa {
+        align-content: space-around;
+        -webkit-align-content: space-around;
+}
+.al_co_stretch {
+        align-content: stretch;
+        -webkit-align-content: stretch;
+}
+*{
+        margin: 0;
+        padding: 0;
+        font-size: 16px;
+}
+
+/***********************************************************************************************************************/
+/********************************************************空格实体*******************************************************/
+/***********************************************************************************************************************
+        HTML提供了5种空格实体（space entity），它们拥有不同的宽度，非断行空格（&nbsp;）是常规空格的宽度，可运行于所有主流浏览器。
+        其他几种空格（ &ensp; &emsp; &thinsp; &zwnj;&zwj;）在不同浏览器中宽度各异。
+
+        1、&nbsp;
+        它叫不换行空格，全称No-Break Space，它是最常见和我们使用最多的空格，大多数的人可能只接触了&nbsp;，它是按下space键产生的空格。
+        在HTML中，如果你用空格键产生此空格，空格是不会累加的（只算1个）。要使用html实体表示才可累加，
+        该空格占据宽度受字体影响明显而强烈。
+
+        2、&ensp;
+        它叫“半角空格”，全称是En Space，en是字体排印学的计量单位，为em宽度的一半。根据定义，它等同于字体度的一半（如16px字体中
+        就是8px）。名义上是小写字母n的宽度。此空格传承空格家族一贯的特性：透明的，此空格有个相当稳健的特性，就是其占据的宽度正好
+        是1/2个中文宽度，而且基本上不受字体影响。
+
+
+        3、&emsp;
+        它叫“全角空格”，全称是Em Space，em是字体排印学的计量单位，相当于当前指定的点数。例如，1 em在16px的字体中就是16px。此空格
+        也传承空格家族一贯的特性：透明的，此空格也有个相当稳健的特性，
+        就是其占据的宽度正好是1个中文宽度，而且基本上不受字体影响。
+
+        4、&thinsp;
+        它叫窄空格，全称是Thin Space。我们不妨称之为“瘦弱空格”，就是该空格长得比较瘦弱，身体单薄，占据的宽度比较小。它是em之六分
+        之一宽。
+
+        5、&zwnj;
+        它叫零宽不连字，全称是Zero Width Non Joiner，简称“ZWNJ”，是一个不打印字符，放在电子文本的两个字符之间，抑制本来会发生的
+        连字，而是以这两个字符原本的字形来绘制。Unicode中的零宽不连字字符映射为“”（zero width non-joiner，U+200C），HTML字符值
+        引用为： &#8204;
+
+        6、&zwj;
+        它叫零宽连字，全称是Zero Width Joiner，简称“ZWJ”，是一个不打印字符，放在某些需要复杂排版语言（如阿拉伯语、印地语）的两
+        个字符之间，使得这两个本不会发生连字的字符产生了连字效果。零宽连字符的Unicode码位是U+200D (HTML: &#8205; &zwj;）。
+
+        此外，浏览器还会把以下字符当作空白进行解析：空格（&#x0020;）、制表位（&#x0009;）、换行（&#x000A;）和回车（&#x000D;）还有
+        （&#12288;）等等。
+
+************************************************************************************************************************/

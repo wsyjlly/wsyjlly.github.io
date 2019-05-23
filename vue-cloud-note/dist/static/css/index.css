@@ -1,0 +1,54 @@
+#first-top,#first-bottom,#second-top{
+	width: 100%;
+	height: 60px;
+	font-size: 24px;
+	background: rgba(219,219,219,0.2);
+}
+#first-top>div,#second-top>div{
+	font-size: 20px;
+	margin-left: 10px;
+	cursor: pointer;
+}
+#first-top>img,#second-top>img{
+	margin-right: 10px;
+	cursor: pointer;
+}
+.note-item,.note-item2,.note-item3,.folder-item{
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  /*background: #bbdff4;*/
+  cursor: pointer;
+  border-bottom: solid 1px #DBDBDB;
+  /*margin-top: 1px;*/
+}
+
+.note-item:nth-last-child(1),
+.note-item2:nth-last-child(1),
+.note-item3:nth-last-child(1),
+.folder-item:nth-last-child(1){
+  border: none;
+}
+.note-item:hover,.note-item2:hover,.note-item3:hover,.folder-item:hover{
+  color: #42b983;
+  border-bottom: solid 1px #42b983;
+  /*margin-top: 1px;*/
+}
+.note-item2,.note-item3{
+	/*display: none;*/
+}
+.note-item>img,.note-item2>img,.note-item3>img,.folder-item>img{
+	margin:0 10px;
+}
+.note-item>p,.note-item2>p,.note-item3>p,.folder-item>p{
+	/*width: 100%;*/
+  text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.note-item>div>img,.note-item2>div>img,.note-item3>div>img,.folder-item>div>img{
+	/*background: #d3d0db;*/
+	padding: 0 5px;
+}
+
