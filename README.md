@@ -3,7 +3,7 @@
 ## 我的社区
 - [博客园-wsyjlly](https://www.cnblogs.com/wsyjlly "wsyjlly")
 - [开源中国-wsyjlly](https://my.oschina.net/wsyjlly "wsyjlly")
-- [云栖社区-simple_point](https://yq.aliyun.com/users/xrbvq3ldlqeeq "simple_point")
+- [云栖社区-wsyjlly](https://yq.aliyun.com/u/wsyjlly "wsyjlly")
 - [CSDN-wsyjlly](https://blog.csdn.net/qq_39743981 "wsyjlly")
 - [码云](https://gitee.com/wsyjlly "wsyjlly")
 ---------
